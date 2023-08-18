@@ -12,14 +12,18 @@ const ThemeToggle = ({ className }: ClassName) => {
   return (
     <Button
       variant='shake'
-      className={`-px-4 -py-2 ${className}`}
       onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+      className={`-px-4 -py-2 ${className}`}
     >
-      {theme === 'dark' ? (
-        <Icons.Moon className='w-6 h-6 fill-primary' />
-      ) : (
-        <Icons.Sun className='w-6 h-6 stroke-primary' />
-      )}
+      <Icons.Sun
+        className='w-6 h-6 transition-all scale-100 rotate-0 stroke-primary dark:-rotate-90 dark:scale-0'
+        aria-hidden='true'
+      />
+      <Icons.Moon
+        className='absolute w-6 h-6 transition-all scale-0 rotate-90 fill-primary dark:rotate-0 dark:scale-100'
+        aria-hidden='true'
+      />
+      <span className='sr-only'>Toggle theme</span>
     </Button>
   );
 };
