@@ -39,6 +39,7 @@
     "import/prefer-default-export": "off",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "react/jsx-filename-extension": [1, { "extensions": [".ts", ".tsx"] }],
+    "react/require-default-props": "off",
     "no-nested-ternary": "off",
     "no-unused-vars": "error"
   }
