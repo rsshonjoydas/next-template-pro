@@ -1,30 +1,63 @@
 'use client';
 
 import { useTheme } from 'next-themes';
+import { useEffect } from 'react';
 
-import Icons from '@/components/icons';
-import { Button } from '@/components/ui/button';
-import { ClassName } from '@/types';
+const ThemeToggle = () => {
+  const { theme, setTheme, systemTheme } = useTheme();
 
-const ThemeToggle = ({ className }: ClassName) => {
-  const { setTheme, theme } = useTheme();
+  const handleThemeChange = (newTheme: any) => {
+    setTheme(newTheme);
+  };
+
+  const style =
+    "relative -ml-[1.5rem] mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca";
+
+  useEffect(() => {
+    // Set the initial theme based on system preference
+    if (systemTheme === 'dark') {
+      setTheme('dark');
+    } else if (systemTheme === 'light') {
+      setTheme('light');
+    }
+  }, [setTheme, systemTheme]);
 
   return (
-    <Button
-      variant='shake'
-      onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-      className={`-px-4 -py-2 ${className}`}
-    >
-      <Icons.Sun
-        className='w-6 h-6 transition-all scale-100 rotate-0 stroke-primary dark:-rotate-90 dark:scale-0'
-        aria-hidden='true'
-      />
-      <Icons.Moon
-        className='absolute w-6 h-6 transition-all scale-0 rotate-90 fill-primary dark:rotate-0 dark:scale-100'
-        aria-hidden='true'
-      />
-      <span className='sr-only'>Toggle theme</span>
-    </Button>
+    <div className='items-center'>
+      <h3 className='mb-4 font-semibold text-gray-900 dark:text-white'>Choose Theme</h3>
+      <ul className='w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white'>
+        <li className='w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600'>
+          <label className='flex items-center pl-3 ml-6'>
+            <input
+              type='radio'
+              value='light'
+              name='theme'
+              className={style}
+              checked={theme === 'light'}
+              onChange={() => handleThemeChange('light')}
+            />
+            <span className='w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+              Light theme
+            </span>
+          </label>
+        </li>
+        <li className='w-full rounded-t-lg dark:border-gray-600'>
+          <label className='flex items-center pl-3 ml-6'>
+            <input
+              type='radio'
+              value='dark'
+              name='theme'
+              className={style}
+              checked={theme === 'dark'}
+              onChange={() => handleThemeChange('dark')}
+            />
+            <span className='w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
+              Dark theme
+            </span>
+          </label>
+        </li>
+      </ul>
+    </div>
   );
 };
 
