@@ -40,23 +40,21 @@ const Icons = {
   ),
 
   System: ({ className }: ClassName) => (
-    <span className={className}>
-      <svg viewBox='0 0 24 24' fill='none' className='w-5 h-5 mr-2'>
-        <path
-          d='M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6Z'
-          strokeWidth='2'
-          strokeLinejoin='round'
-          className='stroke-slate-400 dark:stroke-slate-500'
-        />
-        <path
-          d='M14 15c0 3 2 5 2 5H8s2-2 2-5'
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-          className='stroke-slate-400 dark:stroke-slate-500'
-        />
-      </svg>
-    </span>
+    <svg viewBox='0 0 24 24' fill='none' className='w-5 h-5 mr-2'>
+      <path
+        d='M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6Z'
+        strokeWidth='2'
+        strokeLinejoin='round'
+        className={className}
+      />
+      <path
+        d='M14 15c0 3 2 5 2 5H8s2-2 2-5'
+        strokeWidth='2'
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        className={className}
+      />
+    </svg>
   ),
 
   Loading: () => (

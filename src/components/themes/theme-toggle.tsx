@@ -13,6 +13,8 @@ import {
 const ThemeToggle = () => {
   const { setTheme } = useTheme();
 
+  const theme = typeof window !== 'undefined' ? localStorage.getItem('theme') : null;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -23,9 +25,27 @@ const ThemeToggle = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align='end'>
-        <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme('system')}>System</DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setTheme('light')}
+          className={`${theme === 'light' ? 'bg-accent' : ''}`}
+        >
+          <Icons.Sun className='w-5 h-5 mr-2 stroke-primary' />
+          Light
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setTheme('dark')}
+          className={`${theme === 'dark' ? 'bg-accent' : ''}`}
+        >
+          <Icons.Moon className='w-5 h-5 mr-2 fill-primary' />
+          Dark
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => setTheme('system')}
+          className={`${theme === 'system' || theme === null ? 'bg-accent' : ''}`}
+        >
+          <Icons.System className='w-5 h-5 mr-2 stroke-primary' />
+          System
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
