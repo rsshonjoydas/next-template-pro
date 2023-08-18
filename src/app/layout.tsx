@@ -71,7 +71,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}
         suppressHydrationWarning
       >
-        <ThemeProvider>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
           <div className='relative flex flex-col min-h-screen'>
             <SiteHeader />
             <div className='flex-1'>{children}</div>
