@@ -1,62 +1,53 @@
 'use client';
 
+import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Icons from '../icons';
+import { Button } from '../ui/button';
+import { Label } from '../ui/label';
+import { Skeleton } from '../ui/skeleton';
 
 const ThemeToggle = () => {
-  const { theme, setTheme, systemTheme } = useTheme();
-
-  const handleThemeChange = (newTheme: any) => {
-    setTheme(newTheme);
-  };
-
-  const style =
-    "relative -ml-[1.5rem] mt-0.5 h-5 w-5 appearance-none rounded-full border-2 border-solid border-neutral-300 before:pointer-events-none before:absolute before:h-4 before:w-4 before:scale-0 before:rounded-full before:bg-transparent before:opacity-0 before:shadow-[0px_0px_0px_13px_transparent] before:content-[''] after:absolute after:z-[1] after:block after:h-4 after:w-4 after:rounded-full after:content-[''] checked:border-primary checked:before:opacity-[0.16] checked:after:absolute checked:after:left-1/2 checked:after:top-1/2 checked:after:h-[0.625rem] checked:after:w-[0.625rem] checked:after:rounded-full checked:after:border-primary checked:after:bg-primary checked:after:content-[''] checked:after:[transform:translate(-50%,-50%)] hover:cursor-pointer hover:before:opacity-[0.04] hover:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:shadow-none focus:outline-none focus:ring-0 focus:before:scale-100 focus:before:opacity-[0.12] focus:before:shadow-[0px_0px_0px_13px_rgba(0,0,0,0.6)] focus:before:transition-[box-shadow_0.2s,transform_0.2s] checked:focus:border-primary checked:focus:before:scale-100 checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca] checked:focus:before:transition-[box-shadow_0.2s,transform_0.2s] dark:border-neutral-600 dark:checked:border-primary dark:checked:after:border-primary dark:checked:after:bg-primary dark:focus:before:shadow-[0px_0px_0px_13px_rgba(255,255,255,0.4)] dark:checked:focus:border-primary dark:checked:focus:before:shadow-[0px_0px_0px_13px_#3b71ca";
+  const { setTheme: setMode, resolvedTheme: mode } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // Set the initial theme based on system preference
-    if (systemTheme === 'dark') {
-      setTheme('dark');
-    } else if (systemTheme === 'light') {
-      setTheme('light');
-    }
-  }, [setTheme, systemTheme]);
+    setMounted(true);
+  }, []);
 
   return (
-    <div className='items-center'>
-      <h3 className='mb-4 font-semibold text-gray-900 dark:text-white'>Choose Theme</h3>
-      <ul className='w-48 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white'>
-        <li className='w-full border-b border-gray-200 rounded-t-lg dark:border-gray-600'>
-          <label className='flex items-center pl-3 ml-6'>
-            <input
-              type='radio'
-              value='light'
-              name='theme'
-              className={style}
-              checked={theme === 'light'}
-              onChange={() => handleThemeChange('light')}
-            />
-            <span className='w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-              Light theme
-            </span>
-          </label>
-        </li>
-        <li className='w-full rounded-t-lg dark:border-gray-600'>
-          <label className='flex items-center pl-3 ml-6'>
-            <input
-              type='radio'
-              value='dark'
-              name='theme'
-              className={style}
-              checked={theme === 'dark'}
-              onChange={() => handleThemeChange('dark')}
-            />
-            <span className='w-full py-3 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300'>
-              Dark theme
-            </span>
-          </label>
-        </li>
-      </ul>
+    <div className='space-y-1.5'>
+      <Label className='text-xs'>Mode</Label>
+      <div className='grid grid-cols-3 gap-2 w-72'>
+        {mounted ? (
+          <>
+            <Button
+              variant='outline'
+              size='sm'
+              onClick={() => setMode('light')}
+              className={cn(mode === 'light' && 'border-2 border-primary')}
+            >
+              <Icons.Sun className='w-6 h-6 mr-1 stroke-gray-500 dark:stroke-gray-300' />
+              Light
+            </Button>
+            <Button
+              variant='outline'
+              size='sm'
+              onClick={() => setMode('dark')}
+              className={cn(mode === 'dark' && 'border-2 border-primary')}
+            >
+              <Icons.Moon className='w-6 h-6 mr-1 fill-gray-500 dark:fill-gray-300' />
+              Dark
+            </Button>
+          </>
+        ) : (
+          <>
+            <Skeleton className='w-full h-8' />
+            <Skeleton className='w-full h-8' />
+          </>
+        )}
+      </div>
     </div>
   );
 };
