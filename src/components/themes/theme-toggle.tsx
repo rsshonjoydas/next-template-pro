@@ -1,54 +1,33 @@
 'use client';
 
-import { cn } from '@/lib/utils';
 import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
 import Icons from '../icons';
 import { Button } from '../ui/button';
-import { Label } from '../ui/label';
-import { Skeleton } from '../ui/skeleton';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
 
 const ThemeToggle = () => {
-  const { setTheme: setMode, resolvedTheme: mode } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const { setTheme } = useTheme();
 
   return (
-    <div className='space-y-1.5'>
-      <Label className='text-xs'>Mode</Label>
-      <div className='grid grid-cols-3 gap-2 w-72'>
-        {mounted ? (
-          <>
-            <Button
-              variant='outline'
-              size='sm'
-              onClick={() => setMode('light')}
-              className={cn(mode === 'light' && 'border-2 border-primary')}
-            >
-              <Icons.Sun className='w-6 h-6 mr-1 stroke-gray-500 dark:stroke-gray-300' />
-              Light
-            </Button>
-            <Button
-              variant='outline'
-              size='sm'
-              onClick={() => setMode('dark')}
-              className={cn(mode === 'dark' && 'border-2 border-primary')}
-            >
-              <Icons.Moon className='w-6 h-6 mr-1 fill-gray-500 dark:fill-gray-300' />
-              Dark
-            </Button>
-          </>
-        ) : (
-          <>
-            <Skeleton className='w-full h-8' />
-            <Skeleton className='w-full h-8' />
-          </>
-        )}
-      </div>
-    </div>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button variant='ghost' className='px-0 w-9'>
+          <Icons.Sun className='w-6 h-6 transition-all scale-100 rotate-0 stroke-primary dark:-rotate-90 dark:scale-0' />
+          <Icons.Moon className='absolute w-6 h-6 transition-all scale-0 rotate-90 fill-primary dark:rotate-0 dark:scale-100' />
+          <span className='sr-only'>Toggle theme</span>
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align='end'>
+        <DropdownMenuItem onClick={() => setTheme('light')}>Light</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('dark')}>Dark</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setTheme('system')}>System</DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 
