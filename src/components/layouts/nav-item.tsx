@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 import { MainNavItem } from '@/types/nav';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { usePathname, useSelectedLayoutSegment } from 'next/navigation';
 
 interface MainNavProps {
   items: MainNavItem[];
@@ -9,46 +9,22 @@ interface MainNavProps {
 }
 
 const NavItem = ({ items, className }: MainNavProps) => {
-  const [activeLabelOnScroll, setActiveLabelOnScroll] = useState<string | null>(null);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const sections = items.map((item) => item.title?.toLocaleLowerCase());
-      const activeSection: any = sections.find((section: string) => {
-        const element = document.getElementById(section);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return rect.top <= 0 && rect.bottom > 0;
-        }
-        return false;
-      });
-
-      setActiveLabelOnScroll(activeSection);
-    };
-
-    // Attach the scroll event listener
-    window.addEventListener('scroll', handleScroll);
-
-    // Remove the scroll event listener when the component unmounts
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [items]);
+  const segment = useSelectedLayoutSegment();
+  const pathname = usePathname();
 
   return (
     <div>
       {items?.length ? (
         <nav className={className}>
-          {items?.map((item) => (
+          {items?.map((item: any) => (
             <Link
               key={item.id}
-              href={item.disabled ? '#' : `#${item.title?.toLocaleLowerCase()}`}
+              href={item.disabled ? '#' : item.href}
               className={cn(
                 'transition-colors py-1 hover:text-foreground/80',
                 item.disabled ? 'cursor-not-allowed opacity-60' : '',
-                activeLabelOnScroll === item.title?.toLocaleLowerCase()
-                  ? 'text-foreground'
-                  : 'text-foreground/60'
+                item.href.startsWith(`/${segment}`) ? 'text-foreground' : 'text-foreground/60',
+                pathname === item.href ? 'text-foreground' : 'text-foreground/60'
               )}
             >
               {item.title}
