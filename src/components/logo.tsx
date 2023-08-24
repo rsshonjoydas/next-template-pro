@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const Logo = ({ className }: ClassName) => (
-  <div className={`pt-1 ml-4 ${className}`}>
+  <div className={`-mt-1 ml-4 ${className}`}>
     <Link href='/'>
       <Image
         height={40}

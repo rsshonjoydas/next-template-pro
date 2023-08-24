@@ -1,7 +1,7 @@
 import SiteFooter from '@/components/layouts/site-footer';
 import SiteHeader from '@/components/layouts/site-header';
 import { TailwindIndicator } from '@/components/themes/tailwind-indicator';
-import ThemeProvider from '@/components/themes/theme-provider';
+import { ThemeProvider } from '@/components/themes/theme-provider';
 import env from '@/config/env';
 import { siteConfig } from '@/config/site';
 import { fontSans } from '@/lib/fonts';
@@ -71,7 +71,12 @@ export default function RootLayout({ children }: RootLayoutProps) {
         className={cn('min-h-screen bg-background font-sans antialiased', fontSans.variable)}
         suppressHydrationWarning
       >
-        <ThemeProvider>
+        <ThemeProvider
+          attribute='class'
+          defaultTheme='system'
+          enableSystem
+          disableTransitionOnChange
+        >
           <div className='relative flex flex-col min-h-screen'>
             <SiteHeader />
             <div className='flex-1'>{children}</div>
