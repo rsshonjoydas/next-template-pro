@@ -1,7 +1,13 @@
 'use client';
 
-import { Children } from '@/types';
+import { ThemeProvider as NextThemesProvider } from 'next-themes';
+import { ThemeProviderProps } from 'next-themes/dist/types';
+import { TooltipProvider } from '../ui/tooltip';
 
-const ThemeProvider = ({ children }: Children) => <div>{children}</div>;
-
-export default ThemeProvider;
+export function ThemeProvider({ children, ...props }: ThemeProviderProps) {
+  return (
+    <NextThemesProvider {...props}>
+      <TooltipProvider>{children}</TooltipProvider>
+    </NextThemesProvider>
+  );
+}
