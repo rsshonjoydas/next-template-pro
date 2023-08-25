@@ -1,5 +1,3 @@
-import SiteFooter from '@/components/layouts/site-footer';
-import SiteHeader from '@/components/layouts/site-header';
 import { TailwindIndicator } from '@/components/themes/tailwind-indicator';
 import { ThemeProvider } from '@/components/themes/theme-provider';
 import env from '@/config/env';
@@ -77,11 +75,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           enableSystem
           disableTransitionOnChange
         >
-          <div className='relative flex flex-col min-h-screen'>
-            <SiteHeader />
-            <div className='flex-1'>{children}</div>
-            <SiteFooter />
-          </div>
+          {children}
           <TailwindIndicator />
         </ThemeProvider>
       </body>
