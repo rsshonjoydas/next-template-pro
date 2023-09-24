@@ -4,14 +4,16 @@
 [![LinkedIn][linkedin-shield]][linkedin-url]
 
 <p align="center">
-  <h3 align="center">Next Boilerplate
-  <div align="center"><h3>Project Link: <a href="https://github.com/rsshonjoydas/next-boilerplate">GitHub</a> or <a href="https://codesandbox.io/s/github/rsshonjoydas/next-boilerplate/tree/main">CodeSandbox</a></h3></div>
+  <h3 align="center">Next Template</h3>
+  <div align="center"><h3>Project Link: <a href="https://github.com/rsshonjoydas/next-template-pro">GitHub</a> or <a href="https://codesandbox.io/s/github/rsshonjoydas/next-template-pro/tree/main">CodeSandbox</a></h3></div>
+</p>
 
 <!-- TABLE OF CONTENTS -->
 
 ## Table of Contents
 
 - [How to run](#how-to-run)
+- [Manual Setup](#manual-setup)
 - [Contact](#contact)
 
 <!-- HOW TO RUN -->
@@ -22,7 +24,7 @@ Please follow the below instructions to run this project in your computer:
 
 1. Clone this repository
    ```sh
-   git clone git@github.com:rsshonjoydas/next-boilerplate.git
+   git clone git@github.com:rsshonjoydas/next-template-pro.git
    ```
 2. Install this project using yarn
 
@@ -30,13 +32,56 @@ Please follow the below instructions to run this project in your computer:
    yarn install
    ```
 
-3. Your app should be available in http://localhost:3000
+3. First, run the development server:
 
-### Notes
+   ```bash
+   yarn dev
+   ```
 
-- ##### [How to use husky](https://github.com/rsshonjoydas/docs/blob/main/docs/husky.md)
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-  <!-- CONTACT -->
+## Manual Setup
+
+1.  Install Next JS
+
+    ```sh
+    yarn create next-app --typescript --tailwind --eslint
+    ```
+
+2.  Engine Locking configuration `optional`
+
+    - Create `.npmrc` file and add below the code
+
+      ```sh
+      engine-strict=true
+      ```
+
+    - Create `.nvmrc` file and add below the code
+
+      ```sh
+      lts/fermium
+      ```
+
+    - Add this configuration to your project `package.json`
+
+      ```json
+      "engines": {
+         "node": ">=14.0.0",
+         "yarn": ">=1.22.0",
+         "npm": "please-use-yarn"
+       }
+      ```
+
+3.  Visual Studio Settings configuration `optional`
+
+    - ##### Get VSCode [Settings.json](https://github.com/rsshonjoydas/docs/blob/main/docs/vscode.md) file
+
+4.  Airbnb style guide setup
+
+    - ##### Get [eslintrc.json](https://github.com/rsshonjoydas/docs/blob/main/docs/airbnb-style-guide.md) file
+
+5.  Git Hooks for Husky
+    - ##### [How to use husky](https://github.com/rsshonjoydas/docs/blob/main/docs/husky.md)
 
 ## Contact
 
