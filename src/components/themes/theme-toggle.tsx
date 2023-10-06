@@ -27,21 +27,21 @@ const ThemeToggle = () => {
       <DropdownMenuContent align='end'>
         <DropdownMenuItem
           onClick={() => setTheme('light')}
-          className={`${theme === 'light' ? 'bg-accent' : ''}`}
+          className={`${theme === 'light' ? 'bg-accent my-0.5' : ''}`}
         >
           <Icons.Sun className='w-5 h-5 mr-2 stroke-primary' />
           Light
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme('dark')}
-          className={`${theme === 'dark' ? 'bg-accent' : ''}`}
+          className={`${theme === 'dark' ? 'bg-accent my-0.5' : ''}`}
         >
           <Icons.Moon className='w-5 h-5 mr-2 fill-primary' />
           Dark
         </DropdownMenuItem>
         <DropdownMenuItem
           onClick={() => setTheme('system')}
-          className={`${theme === 'system' || theme === null ? 'bg-accent' : ''}`}
+          className={`${theme === 'system' || theme === null ? 'bg-accent my-0.5' : ''}`}
         >
           <Icons.System className='w-5 h-5 mr-2 stroke-primary' />
           System
